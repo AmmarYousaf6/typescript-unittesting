@@ -41,3 +41,17 @@ describe("getStringInfo should", () => {
     expect(actual.extraInfo).toBeTruthy();
   });
 });
+
+//paramterized testing
+describe.only('ToUpperCase example', ()=>{
+    it.each([
+        {
+            input:'abc', expected: 'ABC'
+        },{
+            input:'def', expected: 'DEF',
+        }
+    ])('$input toUpperCase should be $expected', ({input, expected})=>{
+        const actual = toUpperCase(input);
+        expect(actual).toBe(expected);
+    });
+})
