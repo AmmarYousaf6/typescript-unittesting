@@ -4,7 +4,10 @@ const actual = getStringInfo("My-string");
 
 
 describe('Utils test suite', () => {
-    describe.only('StringUtils tests', ()=>{
+    //describle.only > will only run this describe , describe.skip will skip it, describe.concurrent, describe.todo
+    // describe.only || describe.skip('StringUtils tests', ()=>{
+    //xit is an alias for it.skip, fit is an alias for it.only
+    describe('StringUtils tests', ()=>{
         let sut:StringUtils;
         beforeEach(()=>{
             sut = new StringUtils();
@@ -17,6 +20,29 @@ describe('Utils test suite', () => {
             const actual__ = sut.toUpperCase('abc');
             expect(actual__).toBe('ABC');
         });
+
+        it('should throw an error', ()=>{
+            function expectError(){
+                const actual = sut.toUpperCase('');
+            }
+            expect(expectError).toThrow();
+            expect(expectError).toThrowError("Invalid Arguement");
+        });
+
+        it('should throw an error - arrow function', ()=>{
+            expect(()=>{
+                sut.toUpperCase('');
+            }).toThrowError("Invalid Arguement");
+        });
+        it('should throw an error - try catch block', ()=>{
+            try {
+                sut.toUpperCase('');
+            } catch (error) {
+                expect(error).toBeInstanceOf(Error);
+                expect(error).toHaveProperty('message', 'Invalid Arguement');
+            }
+        });
+
     });
 });
 
@@ -62,7 +88,7 @@ describe("getStringInfo should", () => {
 });
 
 //paramterized testing
-describe.only('ToUpperCase example', ()=>{
+describe('ToUpperCase example', ()=>{
     it.each([
         {
             input:'abc', expected: 'ABC'

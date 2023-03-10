@@ -1,5 +1,7 @@
 export class StringUtils {
     public toUpperCase(arg: string){
+        if(!arg) throw new Error("Invalid Arguement");
+        
         return toUpperCase(arg);
     }
 }
